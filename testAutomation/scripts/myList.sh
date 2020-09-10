@@ -1,9 +1,12 @@
 #!/bin/bash
 
+if [ -a directory.html ]
+    then
+        rm directory.html
+fi 
+
 touch directory.html
 
-echo "Test" >> directory.html
+lc . >> directory.html
 
-echo "HTML File: " && cat directory.html
-
-rm directory.html
+firefox ./directory.html
