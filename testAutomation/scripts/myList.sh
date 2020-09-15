@@ -7,6 +7,6 @@ fi
 
 touch directory.html
 
-lc . >> directory.html
+ls . >> directory.html
 
 firefox ./directory.html
