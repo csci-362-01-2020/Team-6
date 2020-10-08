@@ -1,0 +1,6 @@
+Test Case ID: 1
+File Being Tested: ../project/openmrs-core/api/src/main/java/org/openmrs/User.java
+Method Being Tested: hasRole
+Test Case Driver: ../testCasesExecutables/testCase1Driver.java
+Test Data: Doctor false
+Expected Result: true

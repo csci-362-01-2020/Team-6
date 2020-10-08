@@ -1,0 +1,6 @@
+Test Case ID: 4
+File Being Tested: ../project/openmrs-core/api/src/main/java/org/openmrs/User.java
+Method Being Tested: hasRole
+Test Case Driver: ../testCasesExecutables/testCase4Driver.java
+Test Data: Nurse true
+Expected Result: false
