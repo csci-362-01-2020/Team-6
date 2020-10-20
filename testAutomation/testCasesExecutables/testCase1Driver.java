@@ -1,17 +1,10 @@
-import org.openmrs.User;
+package org.openmrs.util;
 
-public class testCase1Driver extends User {
+public class testCase1Driver {
     public static void main(String[] args) {
-        Role testRole = new Role("Doctor");
-        User testUser = new User();
-        testUser.addRole(testRole);
-        testUser.addRole(SUPERUSER);
-        boolean testOut = testUser.hasRole(args[0], args[1]);
-        if(testOut) {
-            System.out.println("true");
-        }
-        else {
-            System.out.println("false");
-        }
+        ThreadSafeCircularFifoQueue<Integer> testQueue = new ThreadSafeCircularFifoQueue<Integer>();
+        testQueue.add(17);
+        testQueue.add(21);
+        System.out.println(testQueue);
     }
 }

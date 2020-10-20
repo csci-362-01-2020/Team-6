@@ -2,5 +2,5 @@ Test Case ID: 2
 File Being Tested: ../project/openmrs-core/api/src/main/java/org/openmrs/User.java
 Method Being Tested: hasRole
 Test Case Driver: ../testCaseExecutables/testCase2Driver.java
-Test Data: Doctor true
-Expected Result: true
+Test Data: 
+Expected Result: 
