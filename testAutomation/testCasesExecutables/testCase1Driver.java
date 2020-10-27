@@ -1,5 +1,3 @@
-package org.openmrs.util;
-
 public class testCase1Driver {
     public static void main(String[] args) {
         ThreadSafeCircularFifoQueue<Integer> testQueue = new ThreadSafeCircularFifoQueue<Integer>();

@@ -1,38 +1,36 @@
 public class testSystem {
 //aweful garbage code, written in microsoft office
+    public static void main(String[] args) {
+        public static ThreadSafeCircularFifoQueue ditty = new ThreadSafeCircularFifoQueue();
 
-import java.util.Objects;
-import java.io.ObjectInputStream;
+        boolean holdingValue;
 
-private static ThreadSafeCircularFifoQueue ditty = new ThreadSafeCircularFifoQueue();
+        Object input_value;
 
-boolean holdingValue;
+        //input_value = null;
 
-Object input_value;
+        holdingValue = ditty.contains(input_value);
+        System.out.printf("%b", holdingValue);
 
-input_value = null;
+        input_value = new Integer(43);
 
-holdingValue = contains(input_value);
-System.out.printf("%B", holdingValue);
+        holdingValue = ditty.contains(input_value);
+        System.out.printf("%b", holdingValue);
 
-input_value = 43
+        input_value = new Integer(2344);
 
-holdingValue = contains(input_value);
-System.out.printf("%B", holdingValue);
+        holdingValue = contains(input_value);
+        System.out.printf("%b", holdingValue);
 
-input_value = 2344
+        input_value = "foo";
 
-holdingValue = contains(input_value);
-System.out.printf("%B", holdingValue);
+        holdingValue = ditty.contains(input_value);
+        System.out.printf("%b", holdingValue);
 
-input_value = foo
+        input_value = "barr";
 
-holdingValue = contains(input_value);
-System.out.printf("%B", holdingValue);
+        holdingValue = ditty.contains(input_value);
+        System.out.printf("%b", holdingValue);
 
-input_value = barr
-
-holdingValue = contains(input_value);
-System.out.printf("%B", holdingValue);
-
+    }
 }
