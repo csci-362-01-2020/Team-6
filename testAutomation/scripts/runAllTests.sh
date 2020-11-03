@@ -17,15 +17,32 @@ findValue() {
     done
 }
 
+#retrieves expected result of the test case from the test case file
+getExpectedResult(){
+	#search for line in test case file that begins with "Expected 	Result" to get the expected result value
+	cat $testDriver | while read line; do
+		if [[ $line =~ Expected[[:space:]]Result ]]; then
+			#gets string from position 16 to the end of line
+			expectedResult=${line:16} 
+			echo $expectedResult
+		fi
+	done
+}
+
+
 
 numFiles=$(ls ../testCases | wc -l)
 list=$(find ../project -name 'ThreadSafeCircularFifoQueue.java')
 filePath=${list[0]}
 baseDirectory="../testCasesExecutables"
+
 cp $filePath $baseDirectory
 sed -i "s/package org.openmrs.util//" $baseDirectory/ThreadSafeCircularFifoQueue.java
 touch ../temp/out.html
 
+
+
+#loop through test case files
 for (( i = 1 ; i <= $numFiles ; i++)); do
 
     unset driver
@@ -38,19 +55,56 @@ for (( i = 1 ; i <= $numFiles ; i++)); do
     testDriver=$(find ../testCases -name 'testCase'$i'.txt')
     driver=$(findDriver $testDriver)
     driver=$(basename $driver)
+    #strips the carriage return
     driver=${driver%$'\r'}
 
-    echo $driver
 
     driverNoExt=${driver%.*}
 
+    #get value passed into driver
     data=$(findValue $testDriver)
+    #get expected result for test case
+    expected=$(getExpectedResult $testDriver)
+    ########################################
+    #gets rid of carriage return
+    expected=$(basename $expected)
+    expected=${expected%$'\r'}
+    ########################################
+    
+    #output to command prompt window
+    echo $testDriver
+    echo $driver
+    echo input value = $data
+    echo expected result = $expected
 
     cd $baseDirectory
     javac ThreadSafeCircularFifoQueue.java -d $baseDirectory && javac $driver -d $baseDirectory -cp $baseDirectory
 
-    echo "Test "$i":" >> ../temp/out.html
-    java $driverNoExt $data >> ../temp/out.html
+    echo "Test "$i":" >> ../temp/out.html    
+
+    
+    
+    #get result of test case
+    actualTestResult=$(java $driverNoExt $data)
+    ###########################################
+    #gets rid of carriage return
+    actualTestResult=$(basename $actualTestResult)
+    actualTestResult=${actualTestResult%$'\r'}
+    ###########################################
+    echo test result: $actualTestResult >> ../temp/out.html
+    echo test result = $actualTestResult
+    echo ""
+    echo ""
+    
+    
+    #compare expected result and actual result of the test
+    if [[ $actualTestResult =~ $expected ]]; then
+    	echo "Test case PASSED." >> ../temp/out.html
+    else
+    	echo "Test case FAILED. Result of the test is not the expected result." >> ../temp/out.html
+    fi
+    
+    
     rm *.class
 
 done
