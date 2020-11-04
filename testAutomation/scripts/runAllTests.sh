@@ -30,6 +30,13 @@ getExpectedResult(){
 }
 
 
+cd ..
+git submodule update --init --recursive
+cd ./scripts
+
+if [[ -e ../temp/out.html ]]; then
+	rm ../temp/out.html
+fi
 
 numFiles=$(ls ../testCases | wc -l)
 list=$(find ../project -name 'ThreadSafeCircularFifoQueue.java')
@@ -39,7 +46,7 @@ baseDirectory="../testCasesExecutables"
 cp $filePath $baseDirectory
 sed -i "s/package org.openmrs.util//" $baseDirectory/ThreadSafeCircularFifoQueue.java
 touch ../temp/out.html
-
+echo "<p>" >> ../temp/out.html
 
 
 #loop through test case files
@@ -79,11 +86,8 @@ for (( i = 1 ; i <= $numFiles ; i++)); do
 
     cd $baseDirectory
     javac ThreadSafeCircularFifoQueue.java -d $baseDirectory && javac $driver -d $baseDirectory -cp $baseDirectory
+    echo "<b>Test "$i":</b>" >> ../temp/out.html
 
-    echo "Test "$i":" >> ../temp/out.html    
-
-    
-    
     #get result of test case
     actualTestResult=$(java $driverNoExt $data)
     ###########################################
@@ -91,7 +95,7 @@ for (( i = 1 ; i <= $numFiles ; i++)); do
     actualTestResult=$(basename $actualTestResult)
     actualTestResult=${actualTestResult%$'\r'}
     ###########################################
-    echo test result: $actualTestResult >> ../temp/out.html
+    echo Test Result: $actualTestResult. >> ../temp/out.html
     echo test result = $actualTestResult
     echo ""
     echo ""
@@ -99,15 +103,16 @@ for (( i = 1 ; i <= $numFiles ; i++)); do
     
     #compare expected result and actual result of the test
     if [[ $actualTestResult =~ $expected ]]; then
-    	echo "Test case PASSED." >> ../temp/out.html
+    	echo "Test case <span style=\"color:#00FF00\";> PASSED. </span>" >> ../temp/out.html
     else
-    	echo "Test case FAILED. Result of the test is not the expected result." >> ../temp/out.html
+    	echo "Test case <span style=\"color:#FF0000\";> FAILED. </span> Result of the test is not the expected result." >> ../temp/out.html
     fi
-    
+    echo "<br>" >> ../temp/out.html
     
     rm *.class
 
 done
-
+echo "</p>" >> ../temp/out.html
+xdg-open ../temp/out.html
 rm ThreadSafeCircularFifoQueue.java
 #rm ../temp/out.html
