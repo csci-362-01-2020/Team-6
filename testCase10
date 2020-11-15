@@ -1,0 +1,7 @@
+Test Case ID: 10
+File Being Tested: ../project/openmrs-core/api/src/main/java/org/openmrs/util/DataUtil.java
+Method Being Tested: DateUtil
+Requirement: Truncates integer data to seconds representation.
+Test Case Driver: ../testCasesExecutables/testCase10Driver.java
+Test Data: 2100000
+Expected Result: 2100
