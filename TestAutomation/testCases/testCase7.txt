@@ -1,0 +1,7 @@
+Test Case ID: 7
+File Being Tested: ../project/openmrs-core/api/src/main/java/org/openmrs/util/DataUtil.java
+Method Being Tested: truncateToSeconds
+Requirement: Truncates integer data to seconds representation.
+Test Case Driver: ../testCasesExecutables/testCase7Driver.java
+Test Data: 1000022
+Expected Result: 1000

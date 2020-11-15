@@ -106,6 +106,7 @@ for (( i = 1 ; i <= $numFiles ; i++)); do
 
     cd $baseDirectory
     javac ThreadSafeCircularFifoQueue.java -d $baseDirectory && javac $driver -d $baseDirectory -cp $baseDirectory
+    echo "<b>Date and Time Test Ran:</b> "$(date '+%d/%m/%Y %H:%M:%S')" EST<br>" >> ../temp/out.html
     echo "<b>Test Case ID:</b> "$idNum"<br>" >> ../temp/out.html
     echo "<b>File Being Tested:</b> "$filePath"<br>" >> ../temp/out.html
     echo "<b>Method Being Tested:</b> "$methodTest"<br>" >> ../temp/out.html
