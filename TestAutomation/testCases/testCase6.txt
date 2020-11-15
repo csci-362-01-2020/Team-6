@@ -1,7 +1,7 @@
 Test Case ID: 6
-File Being Tested: ../project/openmrs-core/api/src/main/java/org/openmrs/util/DataUtil.java
-Method Being Tested: truncateToSeconds
-Requirement: Truncates integer data to seconds representation.
+File Being Tested: ../project/openmrs-core/api/src/main/java/org/openmrs/util/ThreadSafeCircularFifoQueue.java
+Method Being Tested: add
+Requirement: Ensuring Queue adds items properly is crucial for correct operation
 Test Case Driver: ../testCasesExecutables/testCase6Driver.java
-Test Data: 1000049
-Expected Result:1000
+Test Data: 10
+Expected Result: true

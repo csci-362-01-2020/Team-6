@@ -1,6 +1,6 @@
 public class testCase6Driver {
     public static void main(String[] args) {
-        DataUtil<Long> testQueue = new DataUtil<Long>();
-        System.out.println(testQueue.contains(args[0]));
+        ThreadSafeCircularFifoQueue<Integer> testQueue = new ThreadSafeCircularFifoQueue<Integer>();
+        System.out.println(testQueue.add(Integer.parseInt(args[0])));
     }
 }
