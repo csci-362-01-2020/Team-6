@@ -29,6 +29,24 @@ getExpectedResult(){
 	done
 }
 
+getID() {
+    cat $testDriver | while read line; do
+        if [[ $line =~ Test[[:space:]]Case[[:space:]]ID ]]; then
+            idNum=${line:14}
+            echo $idNum
+        fi
+    done
+}
+
+getMethod() {
+    cat $testDriver | while read line; do
+        if [[ $line =~ Method ]]; then
+            methodTest=${line:21}
+            echo $methodTest
+        fi
+    done
+}
+
 
 git submodule update --init --recursive
 cd ./scripts
@@ -56,10 +74,10 @@ for (( i = 1 ; i <= $numFiles ; i++)); do
     unset driverNoExt
     unset data
 
-
     #echo "testCase"$i".txt"
     testDriver=$(find ../testCases -name 'testCase'$i'.txt')
     driver=$(findDriver $testDriver)
+    fileTest=$driver
     driver=$(basename $driver)
     #strips the carriage return
     driver=${driver%$'\r'}
@@ -76,16 +94,24 @@ for (( i = 1 ; i <= $numFiles ; i++)); do
     expected=$(basename $expected)
     expected=${expected%$'\r'}
     ########################################
+    idNum=$(getID $testDriver)
+    methodTest=$(getMethod $testDriver)
     
     #output to command prompt window
-    echo $testDriver
-    echo $driver
-    echo input value = $data
-    echo expected result = $expected
+    #echo $testDriver
+    #echo $driver
+    #echo input value = $data
+    #echo expected result = $expected
+    #echo $idNum
 
     cd $baseDirectory
     javac ThreadSafeCircularFifoQueue.java -d $baseDirectory && javac $driver -d $baseDirectory -cp $baseDirectory
-    echo "<b>Test "$i":</b>" >> ../temp/out.html
+    echo "<b>Test Case ID:</b> "$idNum"<br>" >> ../temp/out.html
+    echo "<b>File Being Tested:</b> "$filePath"<br>" >> ../temp/out.html
+    echo "<b>Method Being Tested:</b> "$methodTest"<br>" >> ../temp/out.html
+    echo "<b>Test Arguments:</b> "$data"<br>" >> ../temp/out.html
+    echo "<b>Expected Result:</b> "$expected"<br>" >> ../temp/out.html
+
 
     #get result of test case
     actualTestResult=$(java $driverNoExt $data)
@@ -94,10 +120,10 @@ for (( i = 1 ; i <= $numFiles ; i++)); do
     actualTestResult=$(basename $actualTestResult)
     actualTestResult=${actualTestResult%$'\r'}
     ###########################################
-    echo Test Result: $actualTestResult. >> ../temp/out.html
-    echo test result = $actualTestResult
-    echo ""
-    echo ""
+    echo "<b>Test Result</b>: "$actualTestResult".<br>" >> ../temp/out.html
+    #echo test result = $actualTestResult
+    #echo ""
+    #echo ""
     
     
     #compare expected result and actual result of the test
@@ -106,7 +132,7 @@ for (( i = 1 ; i <= $numFiles ; i++)); do
     else
     	echo "Test case <span style=\"color:#FF0000\";> FAILED. </span> Result of the test is not the expected result." >> ../temp/out.html
     fi
-    echo "<br>" >> ../temp/out.html
+    echo "<br><br>" >> ../temp/out.html
     
     rm *.class
 
