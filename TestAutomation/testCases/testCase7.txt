@@ -4,4 +4,4 @@ Method Being Tested: add
 Requirement: Ensuring Queue adds items properly is crucial for correct operation
 Test Case Driver: ../testCasesExecutables/testCase6Driver.java
 Test Data: -32
-Expected Result: false
+Expected Result: true

@@ -78,6 +78,7 @@ for (( i = 1 ; i <= $numFiles ; i++)); do
     testDriver=$(find ../testCases -name 'testCase'$i'.txt')
     driver=$(findDriver $testDriver)
     fileTest=$driver
+    #echo $driver
     driver=$(basename $driver)
     #strips the carriage return
     driver=${driver%$'\r'}
@@ -91,7 +92,7 @@ for (( i = 1 ; i <= $numFiles ; i++)); do
     expected=$(getExpectedResult $testDriver)
     ########################################
     #gets rid of carriage return
-    expected=$(basename $expected)
+    #expected=$(basename $expected)
     expected=${expected%$'\r'}
     ########################################
     idNum=$(getID $testDriver)
@@ -101,8 +102,8 @@ for (( i = 1 ; i <= $numFiles ; i++)); do
     #echo $testDriver
     #echo $driver
     #echo input value = $data
-    #echo expected result = $expected
-    #echo $idNum
+    echo expected result = $expected
+    echo $idNum
 
     cd $baseDirectory
     javac ThreadSafeCircularFifoQueue.java -d $baseDirectory && javac $driver -d $baseDirectory -cp $baseDirectory
@@ -111,6 +112,7 @@ for (( i = 1 ; i <= $numFiles ; i++)); do
     echo "<b>File Being Tested:</b> "$filePath"<br>" >> ../temp/out.html
     echo "<b>Method Being Tested:</b> "$methodTest"<br>" >> ../temp/out.html
     echo "<b>Test Arguments:</b> "$data"<br>" >> ../temp/out.html
+    expected=$(echo $expected | tr -dc '[:print:]\n\r')
     echo "<b>Expected Result:</b> "$expected"<br>" >> ../temp/out.html
 
 
@@ -118,16 +120,23 @@ for (( i = 1 ; i <= $numFiles ; i++)); do
     actualTestResult=$(java $driverNoExt $data)
     ###########################################
     #gets rid of carriage return
-    actualTestResult=$(basename $actualTestResult)
+    #actualTestResult=$(basename $actualTestResult)
     actualTestResult=${actualTestResult%$'\r'}
     ###########################################
-    echo "<b>Test Result</b>: "$actualTestResult".<br>" >> ../temp/out.html
-    #echo test result = $actualTestResult
+
+    actualTestResult=$(echo $actualTestResult | tr -dc '[:print:]\r\n')
+    echo "<b>Test Result</b>: "$actualTestResult"<br>" >> ../temp/out.html
+    echo test result = $actualTestResult
     #echo ""
     #echo ""
-    
+
+
+    echo $actualTestResult | hexdump -C
+    echo $expected | hexdump -C
     
     #compare expected result and actual result of the test
+    echo $actualTestResult
+    echo $expected
     if [[ $actualTestResult =~ $expected ]]; then
     	echo "Test case <span style=\"color:#00FF00\";> PASSED. </span>" >> ../temp/out.html
     else
