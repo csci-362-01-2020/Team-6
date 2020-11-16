@@ -112,7 +112,8 @@ for (( i = 1 ; i <= $numFiles ; i++)); do
     echo "<b>File Being Tested:</b> "$filePath"<br>" >> ../temp/out.html
     echo "<b>Method Being Tested:</b> "$methodTest"<br>" >> ../temp/out.html
     echo "<b>Test Arguments:</b> "$data"<br>" >> ../temp/out.html
-    expected=$(echo $expected | tr -dc '[:print:]\n\r')
+    expected=$(echo -e "${expected}" | sed -e 's/^[[:space:]]*//' -e 's/[[:space:]]*$//')
+    expected=$(echo -e "${expected}" | sed 's/\xc2\xa0/ /g')
     echo "<b>Expected Result:</b> "$expected"<br>" >> ../temp/out.html
 
 
@@ -124,12 +125,12 @@ for (( i = 1 ; i <= $numFiles ; i++)); do
     actualTestResult=${actualTestResult%$'\r'}
     ###########################################
 
-    actualTestResult=$(echo $actualTestResult | tr -dc '[:print:]\r\n')
+    actualTestResult=$(echo -e ${actualTestResult} | sed -e 's/^[[:space:]]*//' -e 's/[[:space:]]*$//')
+    actualTestResult=$(echo -e ${actualTestResult} | sed 's/\xc2\xa0/ /g')
     echo "<b>Test Result</b>: "$actualTestResult"<br>" >> ../temp/out.html
-    echo test result = $actualTestResult
+    #echo test result = $actualTestResult
     #echo ""
     #echo ""
-
 
     echo $actualTestResult | hexdump -C
     echo $expected | hexdump -C
@@ -137,7 +138,7 @@ for (( i = 1 ; i <= $numFiles ; i++)); do
     #compare expected result and actual result of the test
     echo $actualTestResult
     echo $expected
-    if [[ $actualTestResult =~ $expected ]]; then
+    if [[ $actualTestResult =~ "$expected" ]]; then
     	echo "Test case <span style=\"color:#00FF00\";> PASSED. </span>" >> ../temp/out.html
     else
     	echo "Test case <span style=\"color:#FF0000\";> FAILED. </span> Result of the test is not the expected result." >> ../temp/out.html
