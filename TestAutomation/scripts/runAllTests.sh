@@ -102,8 +102,8 @@ for (( i = 1 ; i <= $numFiles ; i++)); do
     #echo $testDriver
     #echo $driver
     #echo input value = $data
-    echo expected result = $expected
-    echo $idNum
+    #echo expected result = $expected
+    #echo $idNum
 
     cd $baseDirectory
     javac ThreadSafeCircularFifoQueue.java -d $baseDirectory && javac $driver -d $baseDirectory -cp $baseDirectory
@@ -127,17 +127,17 @@ for (( i = 1 ; i <= $numFiles ; i++)); do
 
     actualTestResult=$(echo -e ${actualTestResult} | sed -e 's/^[[:space:]]*//' -e 's/[[:space:]]*$//')
     actualTestResult=$(echo -e ${actualTestResult} | sed 's/\xc2\xa0/ /g')
-    echo "<b>Test Result</b>: "$actualTestResult"<br>" >> ../temp/out.html
+    #echo "<b>Test Result</b>: "$actualTestResult"<br>" >> ../temp/out.html
     #echo test result = $actualTestResult
     #echo ""
     #echo ""
 
-    echo $actualTestResult | hexdump -C
-    echo $expected | hexdump -C
+    #echo $actualTestResult | hexdump -C
+    #echo $expected | hexdump -C
     
     #compare expected result and actual result of the test
-    echo $actualTestResult
-    echo $expected
+    #echo $actualTestResult
+    #echo $expected
     if [[ $actualTestResult =~ "$expected" ]]; then
     	echo "Test case <span style=\"color:#00FF00\";> PASSED. </span>" >> ../temp/out.html
     else
