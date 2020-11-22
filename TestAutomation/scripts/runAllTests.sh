@@ -127,7 +127,7 @@ for (( i = 1 ; i <= $numFiles ; i++)); do
 
     actualTestResult=$(echo -e ${actualTestResult} | sed -e 's/^[[:space:]]*//' -e 's/[[:space:]]*$//')
     actualTestResult=$(echo -e ${actualTestResult} | sed 's/\xc2\xa0/ /g')
-    #echo "<b>Test Result</b>: "$actualTestResult"<br>" >> ../temp/out.html
+    echo "<b>Test Result</b>: "$actualTestResult"<br>" >> ../temp/out.html
     #echo test result = $actualTestResult
     #echo ""
     #echo ""

@@ -1,7 +1,0 @@
-Test Case ID: 15
-File Being Tested: ../project/openmrs-core/api/src/main/java/org/openmrs/util/ThreadSafeCircularFifoQueue.java
-Method Being Tested: toArray
-Requirement: Casts data to an array.
-Test Case Driver: ../testCasesExecutables/testCase15Driver.java
-Test Data: {48, 20, 57, 77, 30}
-Expected Result: 

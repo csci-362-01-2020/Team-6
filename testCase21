@@ -1,7 +1,0 @@
-Test Case ID: 21
-File Being Tested: ../project/openmrs-core/api/src/main/java/org/openmrs/util/ThreadSafeCircularFifoQueue.java
-Method Being Tested: contains
-Requirement: Checks for containment of generic array values.
-Test Case Driver: ../testCasesExecutables/testCase21Driver.java
-Test Data: 
-Expected Result: true
