@@ -3,5 +3,5 @@ File Being Tested: ../project/openmrs-core/api/src/main/java/org/openmrs/util/Th
 Method Being Tested: containsAll
 Requirement: Checks for containment of generic array values.
 Test Case Driver: ../testCasesExecutables/testCase21Driver.java
-Test Data: {390, 40, 10}
+Test Data: {390, 40, 10} {390, 40, 10}
 Expected Result: true

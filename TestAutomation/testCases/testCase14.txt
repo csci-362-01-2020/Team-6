@@ -3,5 +3,5 @@ File Being Tested: ../project/openmrs-core/api/src/main/java/org/openmrs/util/Th
 Method Being Tested: toArray
 Requirement: Casts data to an array.
 Test Case Driver: ../testCasesExecutables/testCase11Driver.java
-Test Data: {8, 11}
+Test Data: 8, 11
 Expected Result: {8, 11}

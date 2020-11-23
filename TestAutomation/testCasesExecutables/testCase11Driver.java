@@ -1,15 +1,13 @@
 public class testCase11Driver {
     public static void main(String[] args) {
         ThreadSafeCircularFifoQueue<Integer> testQueue = new ThreadSafeCircularFifoQueue<Integer>();
+        
+        //toArray method requires a destination array which is here
         Object[] solutionArray = new Integer[args.length];
         try {
             for(int i = 0; i < args.length; i++) {
                 String rawVal = args[i];
-                //System.out.println(rawVal);
-                rawVal = rawVal.replace("{", "");
                 rawVal = rawVal.replace(",", "");
-                rawVal = rawVal.replace("}", "");
-                //System.out.println(rawVal);
                 testQueue.add(Integer.parseInt(rawVal));
             }
         }
