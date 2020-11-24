@@ -39,7 +39,7 @@ public class containsTestDriver {
                 /////////////////////////////////////////////////////////////
             }
             //else if the second argument is null, then set args2 to equal null
-            else if(args[i].contains("null") && !first) {
+            else if(args[i].matches("[a-zA-Z]+") && !first) {
                 args2 = null;
 
                 //contains should return false if its input is null, no matter what args1 is
@@ -95,14 +95,22 @@ public class containsTestDriver {
                 try 
                 {
                     //need to pass in an Integer type, instead of String
-                    int containsArg = Integer.parseInt(args[endArg + 1]);
+                    Integer containsArg;    
+                    if(args[endArg + 1].matches("[-+]?\\d+$")) {
+                        containsArg = Integer.parseInt(args[endArg + 1]);
+                    }
+                    else {
+                        containsArg = null;
+                    }
 
                     //need to make args2 an Integer type, instead of Object
                     //int containsArg = (Integer) args2;
                     //int containsArg = (int) args2;
 
                     //call the contains method with given test case argument to get test results
-                    System.out.println(testQueue.contains(containsArg));
+                    if(containsArg != null) {
+                        System.out.println(testQueue.contains(containsArg));
+                    }
 
                 } //end of try block
                 
@@ -112,7 +120,7 @@ public class containsTestDriver {
                     //System.out.println("Error");
 
                     //if the value cannot be converted to an Integer, then pass the value into contains as is
-                    System.out.println(testQueue.contains(args[endArg + 1]));
+                    System.out.println(e.getMessage());
 
                 }//end of catch block
 
