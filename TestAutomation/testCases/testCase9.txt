@@ -2,6 +2,6 @@ Test Case ID: TC009
 File Being Tested: ../project/openmrs-core/api/src/main/java/org/openmrs/util/ThreadSafeCircularFifoQueue.java
 Method Being Tested: add
 Requirement: Ensuring Queue adds items properly is crucial for correct operation
-Test Case Driver: ../testCasesExecutables/testCase6Driver.java
-Test Data: 2147483647
-Expected Result: true
+Test Case Driver: ../testCasesExecutables/addTestDriver.java
+Test Data: {2147483647, 0, -1, 2147483647} -2147483648
+Expected Result: [0, -1, 2147483647, -2147483648]
