@@ -15,12 +15,14 @@ public class toArrayTestDriver {
             System.out.println("Error");
         }
         solutionArray = testQueue.toArray();
+
+        //Building output String
         String outString = "{";
         for(int i = 0; i < solutionArray.length - 1; i++) {
-            //System.out.println(solutionArray[i]);
             outString += solutionArray[i];
             outString += ", ";
         }
+        
         System.out.println(outString + solutionArray[solutionArray.length - 1] + "}");
     }
 }

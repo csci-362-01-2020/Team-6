@@ -3,5 +3,5 @@ File Being Tested: ../project/openmrs-core/api/src/main/java/org/openmrs/util/Th
 Method Being Tested: addAll
 Requirement: Adds all generic types in an array.
 Test Case Driver: ../testCasesExecutables/addAllTestDriver.java
-Test Data: {499}
+Test Data: {499, 105, 175, 200}
 Expected Result: true
