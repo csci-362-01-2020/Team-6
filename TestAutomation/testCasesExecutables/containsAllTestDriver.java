@@ -14,19 +14,29 @@ public class containsAllTestDriver {
         /*
         Methodology for the for loop:
 
-        The argument list will be constructed as followed:
+        The argument list will be constructed as one of the following:
 
         Some string consisting of two pairs of braces with some number 
         of values between each pair of braces with each value ending in 
         either a comma or a right brace.
+        
+        or:
+        
         Some string consisting of one pair of braces with some number 
         of values between the first pair with each value ending in either
         a comma or a right brace, which is then followed by the string 
         "null"
+        
+        or:
+        
         The string "null" followed by a pair of braces with some number
         of values between the pair of braces with each value ending in
         either a comma or a right brace.
+        
+        or:
+        
         The string "null" followed by the string "null"
+
 
         Thus, each argument ends in either ",", "}" or "null," the latter
         two are delimiters. In the instance where the argument ends with 
