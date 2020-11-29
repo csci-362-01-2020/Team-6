@@ -4,7 +4,7 @@
 
 #Finds the test case driver from the text file given
 findDriver() {
-    cat $testDriver | while read line; do
+    cat $testCaseFile | while read line; do
         if [[ $line =~ Test[[:space:]]Case[[:space:]]Driver ]]; then
             caseDriver=${line:17}       
             echo $caseDriver
@@ -14,7 +14,7 @@ findDriver() {
 
 #Finds the Test Data to pass into the test case
 findValue() {
-    cat $testDriver | while read line; do
+    cat $testCaseFile | while read line; do
         if [[ $line =~ Test[[:space:]]Data ]]; then 
             caseData=${line:10}
             echo $caseData
@@ -25,7 +25,7 @@ findValue() {
 #retrieves expected result of the test case from the test case file
 getExpectedResult(){
 	#search for line in test case file that begins with "Expected 	Result" to get the expected result value
-	cat $testDriver | while read line; do
+	cat $testCaseFile | while read line; do
 		if [[ $line =~ Expected[[:space:]]Result ]]; then
 			#gets string from position 16 to the end of line
 			expectedResult=${line:16} 
@@ -36,7 +36,7 @@ getExpectedResult(){
 
 #Gets the Test Case ID from the given text file
 getID() {
-    cat $testDriver | while read line; do
+    cat $testCaseFile | while read line; do
         if [[ $line =~ Test[[:space:]]Case[[:space:]]ID ]]; then
             idNum=${line:14}
             echo $idNum
@@ -46,7 +46,7 @@ getID() {
 
 #Gets the test method from the given text file
 getMethod() {
-    cat $testDriver | while read line; do
+    cat $testCaseFile | while read line; do
         if [[ $line =~ Method ]]; then
             methodTest=${line:21}
             echo $methodTest
@@ -87,8 +87,8 @@ for (( i = 1 ; i <= $numFiles ; i++)); do
     unset driverNoExt
     unset data
 
-    testDriver=$(find ../testCases -name 'testCase'$i'.txt')
-    driver=$(findDriver $testDriver)
+    testCaseFile=$(find ../testCases -name 'testCase'$i'.txt')
+    driver=$(findDriver $testCaseFile)
     fileTest=$driver
     driver=$(basename $driver)
 
@@ -99,15 +99,15 @@ for (( i = 1 ; i <= $numFiles ; i++)); do
     driverNoExt=${driver%.*}
 
     #get value passed into driver
-    data=$(findValue $testDriver)
+    data=$(findValue $testCaseFile)
     #get expected result for test case
-    expected=$(getExpectedResult $testDriver)
+    expected=$(getExpectedResult $testCaseFile)
     ########################################
     #gets rid of carriage return
     expected=${expected%$'\r'}
     ########################################
-    idNum=$(getID $testDriver)
-    methodTest=$(getMethod $testDriver)
+    idNum=$(getID $testCaseFile)
+    methodTest=$(getMethod $testCaseFile)
 
     cd $baseDirectory
     javac ThreadSafeCircularFifoQueue.java -d $baseDirectory && javac $driver -d $baseDirectory -cp $baseDirectory
