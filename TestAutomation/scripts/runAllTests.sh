@@ -57,6 +57,7 @@ getMethod() {
 #Installing dependencies
 sudo apt-get --assume-yes install default-jre
 sudo apt-get --assume-yes install default-jdk
+clear
 
 #Retrieving submodule
 git submodule update --init --recursive
